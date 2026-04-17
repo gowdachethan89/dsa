@@ -36,12 +36,12 @@ public class Day1 {
         }
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > max) {
+        for (int num: arr) {
+            if (num > max) {
                 secondMax = max;
-                max = arr[i];
-            } else if (arr[i] > secondMax && arr[i] != max) {
-                secondMax = arr[i];
+                max = num;
+            } else if (num > secondMax && num != max) {
+                secondMax = num;
             }
         }
         if (secondMax == Integer.MIN_VALUE) {
