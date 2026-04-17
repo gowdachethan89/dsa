@@ -5,41 +5,35 @@ import java.util.*;
 public class Day1 {
     public static void main(String[] args) {
         int[] arr = {1, 5, -4};
-        findMinAndMax(arr);
-        findSecondHeighestElement(arr);
-        arrayIsSorted(arr);
-        sumOfElements(arr);
+        System.out.println(Arrays.toString(findMinAndMax(arr)));
+        System.out.println(Arrays.toString(findSecondHighestElement(arr)));
+        System.out.println(arrayIsSorted(arr));
+        System.out.println(sumOfElements(arr));
     }
 
-    private static void sumOfElements(int[] arr) {
+    private static int sumOfElements(int[] arr) {
         int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
+        for (int num : arr) {
+            sum += num;
         }
-        System.out.println("Sum: " + sum);
+        return sum;
     }
 
-    private static void arrayIsSorted(int[] arr) {
-        if (arr == null) return;
-        if (arr.length <= 1) {
-            System.out.println("Array is Sorted");
-            return;
-        }
-        boolean sorted = true;
+    private static boolean arrayIsSorted(int[] arr) {
+        if (arr == null || arr.length < 1) return false;
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] < arr[i - 1]) {
-                sorted = false;
-                break;
+                return false;
             }
         }
-        if (sorted) {
-            System.out.println("Array is Sorted");
-        } else {
-            System.out.println("Array is not Sorted");
-        }
+        return true;
     }
 
-    private static void findSecondHeighestElement(int[] arr) {
+    private static int[] findSecondHighestElement(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            //return new int[]{-1, -1}; //edge case
+            throw new IllegalArgumentException("Array is empty");
+        }
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
         for (int i = 0; i < arr.length; i++) {
@@ -50,11 +44,17 @@ public class Day1 {
                 secondMax = arr[i];
             }
         }
-        System.out.println("Max: " + max);
-        System.out.println("Second Max: " + secondMax);
+        if (secondMax == Integer.MIN_VALUE) {
+            throw new IllegalArgumentException("No second highest element");
+        }
+        return new int[]{max, secondMax};
     }
 
-    private static void findMinAndMax(int[] arr) {
+    private static int[] findMinAndMax(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            System.out.println("Array is empty");
+            return new int[]{};
+        }
         int min = arr[0];
         int max = arr[0];
         for (int i = 1; i < arr.length; i++) {
@@ -65,6 +65,6 @@ public class Day1 {
                 max = arr[i];
             }
         }
-        System.out.println("min: " + min + ", max: " + max);
+        return new int[]{min, max};
     }
 }
