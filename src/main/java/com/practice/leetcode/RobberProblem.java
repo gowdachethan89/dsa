@@ -4,9 +4,24 @@ import java.util.Arrays;
 
 public class RobberProblem {
     public static void main(String[] args) {
-        int[] arr = {2,7,9,3,1};
+//        int[] arr = {2,7,9,3,1};
+        int[] arr = {1,2,3,1};
         int k = 2;
-        System.out.println(minCapability(arr, k));
+//        System.out.println(minCapability(arr, k));
+        System.out.println(rob(arr));
+
+    }
+
+    public static int rob(int[] nums) {
+        int prev2 = 0;//0,1,2,
+        int prev1 = 0;//1,2,3,
+        for(int amount: nums){
+            int current = Math.max(prev1, amount + prev2);
+            prev2 = prev1;
+            prev1 = current;
+            System.out.println("prev2: " + prev2 + " , prev1: " + prev1  + " , amount: " + amount + " , current: " + current);
+        }
+        return prev1;
     }
 
     public static int minCapability(int[] nums, int k) {
